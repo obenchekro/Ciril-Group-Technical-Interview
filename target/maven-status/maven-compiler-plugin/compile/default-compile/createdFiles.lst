@@ -1,0 +1,14 @@
+com\fireforest\service\ConfigService.class
+com\fireforest\service\SimulationService.class
+com\fireforest\state\CellState.class
+com\fireforest\state\TreeState.class
+com\fireforest\FireForestApplication.class
+com\fireforest\controller\SimulationController.class
+com\fireforest\config\ConfigLoader.class
+com\fireforest\entity\Forest.class
+com\fireforest\state\FireState.class
+com\fireforest\entity\Cell.class
+com\fireforest\state\AshState.class
+com\fireforest\repository\ForestRepository.class
+com\fireforest\utils\PropertyParser.class
+com\fireforest\dto\SimulationConfig.class
