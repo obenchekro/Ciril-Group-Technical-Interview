@@ -21,9 +21,7 @@ public class ConfigLoader {
 
         int height = PropertyParser.parsePositiveInt(prop.getProperty("forest.height"), "forest.height");
         int width = PropertyParser.parsePositiveInt(prop.getProperty("forest.width"), "forest.width");
-
-        String firePositions = prop.getProperty("forest.initialFire");
-        List<int[]> initialFire = PropertyParser.parseFirePositions(firePositions, height, width, "forest.initialFire");
+        List<int[]> initialFire = PropertyParser.parseFirePositions(prop.getProperty("forest.initialFire"), height, width, "forest.initialFire");
         double probability = PropertyParser.parseProbability(prop.getProperty("forest.probability"));
 
         return new SimulationConfig(height, width, initialFire.toArray(new int[0][]), probability);

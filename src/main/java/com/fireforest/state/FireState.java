@@ -18,7 +18,6 @@ public class FireState implements CellState {
             if (nx >= 0 && nx < forest.length && ny >= 0 && ny < forest[0].length) {
                 Cell neighbor = forest[nx][ny];
                 neighbor.getCurrentState().tryIgnite(neighbor, probability);
-
             }
         }
     }
