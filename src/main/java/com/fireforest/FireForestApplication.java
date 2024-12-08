@@ -1,4 +1,3 @@
-
 package com.fireforest;
 
 import org.springframework.boot.SpringApplication;

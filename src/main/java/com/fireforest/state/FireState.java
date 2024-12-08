@@ -1,4 +1,3 @@
-
 package com.fireforest.state;
 
 import com.fireforest.entity.Cell;
@@ -6,7 +5,7 @@ import com.fireforest.entity.Cell;
 public class FireState implements CellState {
 
     @Override
-    public void handle(Cell cell, Cell[][] forest) {
+    public void handle(Cell cell, Cell[][] forest, double probability) {
         cell.setNextState(new AshState());
 
         int x = cell.getX();
@@ -18,7 +17,8 @@ public class FireState implements CellState {
             int ny = y + dir[1];
             if (nx >= 0 && nx < forest.length && ny >= 0 && ny < forest[0].length) {
                 Cell neighbor = forest[nx][ny];
-                neighbor.getCurrentState().tryIgnite(neighbor, 0.3);
+                neighbor.getCurrentState().tryIgnite(neighbor, probability);
+
             }
         }
     }

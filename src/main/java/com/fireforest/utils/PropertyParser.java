@@ -30,6 +30,9 @@ public class PropertyParser {
     }
 
     public static List<int[]> parseFirePositions(String value, int height, int width, String key) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException("Missing fire positions in the initiation.");
+        }
         String[] firePositions = value.split(";");
         List<int[]> initialFire = new ArrayList<>();
         for (String pos : firePositions) {

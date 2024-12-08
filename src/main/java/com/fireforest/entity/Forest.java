@@ -2,7 +2,6 @@ package com.fireforest.entity;
 
 import com.fireforest.state.FireState;
 
-import java.util.Arrays;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -42,10 +41,10 @@ public class Forest {
         }
     }
 
-    public void simulateStep() {
+    public void simulateStep(double probability) {
         for (Cell[] row : grid) {
             for (Cell cell : row) {
-                cell.handle(grid);
+                cell.handle(grid, probability);
             }
         }
 
@@ -54,11 +53,5 @@ public class Forest {
                 cell.transitionToNextState();
             }
         }
-    }
-
-    public boolean hasFire() {
-        return Arrays.stream(grid)
-                .flatMap(Arrays::stream)
-                .anyMatch(cell -> cell.getCurrentState() instanceof FireState);
     }
 }

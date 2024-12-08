@@ -35,8 +35,8 @@ public class Cell {
         }
     }
 
-    public void handle(Cell[][] forest) {
-        currentState.handle(this, forest);
+    public void handle(Cell[][] forest, double probability) {
+        currentState.handle(this, forest, probability);
     }
 
     public boolean shouldIgnite(double probability) {

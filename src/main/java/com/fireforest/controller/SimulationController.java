@@ -7,8 +7,10 @@ import com.fireforest.service.SimulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,23 +36,43 @@ public class SimulationController {
     }
 
     @GetMapping(value = "/initialize", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Forest initialize() {
-        SimulationConfig config = configService.loadConfig();
-        return simulationService.initializeForest(config.getHeight(), config.getWidth(), config.getInitialFire());
+    public ResponseEntity<?> initialize() {
+        try {
+            SimulationConfig config = configService.loadConfig();
+            return ResponseEntity.ok(
+                    simulationService.initializeForest(config.getHeight(), config.getWidth(), config.getInitialFire())
+            );
+        } catch (Exception e) {;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Collections.singletonMap("message", e.getMessage()));
+        }
     }
 
     @GetMapping(value = "raw-representation", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, Object> getRawRepresentation() {
-        Forest forest = initialize();
-        Map<String, Object> response = new HashMap<>();
-        response.put("height", forest.getHeight());
-        response.put("width", forest.getWidth());
-        response.put("grid", forest.toSymbolGrid());
-        return response;
+    public ResponseEntity<Map<String, Object>> getRawRepresentation(@RequestBody Forest forest) {
+        try {
+            if (forest == null) throw new IllegalStateException("Forest not initialized");
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("height", forest.getHeight());
+            response.put("width", forest.getWidth());
+            response.put("grid", forest.toSymbolGrid());
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 
     @PostMapping(value = "/step", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Forest step() {
-        return simulationService.simulateStep();
+    public ResponseEntity<?> step() {
+        try {
+            SimulationConfig config = configService.loadConfig();
+            double probability = config.getProbability();
+            return ResponseEntity.ok(simulationService.simulateStep(probability));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 }

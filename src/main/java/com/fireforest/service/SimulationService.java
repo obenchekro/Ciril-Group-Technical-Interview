@@ -19,9 +19,12 @@ public class SimulationService {
         return forest;
     }
 
-    public Forest simulateStep() {
+    public Forest simulateStep(double probability) {
         Forest forest = forestRepository.getForest();
-        forest.simulateStep();
+        if (forest == null) {
+            throw new IllegalStateException("Forest has not been initialized.");
+        }
+        forest.simulateStep(probability);
         return forest;
     }
 }
