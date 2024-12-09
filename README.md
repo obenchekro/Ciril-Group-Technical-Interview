@@ -38,7 +38,7 @@ forest.probability=0.7
 
 # Launching the project
 Maven is used to encompass all the dependencies versions. Please note that this code base is written in Java 8.
-Webpack is used as a module bundler to compile and bundle the TS code and to configure the Vue app.
+Vite is used as a module bundler to compile and bundle the TS code and to configure the Vue app.
 
 First of all, you need to fire up the backend by installing all the dependencies and launching the server:
 ```bash
