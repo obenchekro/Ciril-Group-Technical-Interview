@@ -54,7 +54,7 @@ npm run build
 npm run serve
 ```
 You can test functionally the server by accessing it in ``localhost:8080``.
-The client app is accessible in ``localhost:4173/```.
+The client app is accessible in ``localhost:4173/``.
 
 # Demo
 ![demo](https://i.imgur.com/LFm0IMi.gif)
